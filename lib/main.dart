@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:wear/wear.dart';
 import 'package:wearable_rotary/wearable_rotary.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -25,8 +23,8 @@ class MyApp extends StatelessWidget {
             useMaterial3: true,
             colorScheme: isActive
                 ? const ColorScheme.dark(
-                    primary: Colors.white60,
-                    background: Color(0xFF200726),
+                    primary: Colors.white,
+                    background: Color(0xFF1B1B1F),
                     onBackground: Colors.white10,
                     onSurface: Colors.white,
                   )
@@ -37,8 +35,7 @@ class MyApp extends StatelessWidget {
                   ),
             elevatedButtonTheme: ElevatedButtonThemeData(
               style: ElevatedButton.styleFrom(
-                backgroundColor:
-                    isActive ? const Color(0xFF622773) : Colors.white10,
+                backgroundColor: isActive ? const Color(0xFF2E59BA) : const Color(0xFF001849),
               ),
             ),
           ),
@@ -62,7 +59,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _incrementCounter() => setState(() => _counter++);
 
-  void _decrementCounter() => setState(() => --_counter);
+  void _decrementCounter() {
+    if (_counter > 0) {
+      setState(() => --_counter);
+    }
+  }
 
   @override
   void initState() {
@@ -70,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
     rotarySubscription = rotaryEvents.listen(handleRotaryEvent);
   }
 
-  void handleRotaryEvent(RotaryEvent event) {
+  void handleRotaryEvent(final RotaryEvent event) {
     if (event.direction == RotaryDirection.clockwise) {
       _incrementCounter();
     } else {
@@ -90,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: const Icon(Icons.add),
             ),
             Text(
-              _counter.toString(),
+              "${_counter.toString()}h",
               style: const TextStyle(
                 fontSize: 50,
                 fontWeight: FontWeight.bold,
